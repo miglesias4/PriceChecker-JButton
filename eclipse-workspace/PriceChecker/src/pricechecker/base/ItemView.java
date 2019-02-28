@@ -51,16 +51,18 @@ public class ItemView extends JPanel {
     @Override
 	public void paint(Graphics g) {
         super.paint(g); 
-        //Dimension dim = getSize();
-        
-        //--
-        //-- WRITE YOUR CODE HERE!
-        //--
         int x = 20, y = 30;
-        // g.drawImage(getImage("view.png"), x, y)
-        g.drawString("[View]", x, y);
+        //g.drawImage(getImage("view.png"), x, y)
         y += 20;
         g.drawString("Hi, I am your item!", x, y);
+        y += 20;
+        g.drawString("Product Name: ", x, y);
+        y += 20;
+        g.drawString("Price: ", x, y);
+        y += 20;
+        g.drawString("Change: ", x, y);
+        y += 20;
+        g.drawString("URL: ", x, y);
 
     }
     

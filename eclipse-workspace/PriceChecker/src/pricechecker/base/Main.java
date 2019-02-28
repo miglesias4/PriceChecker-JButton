@@ -69,12 +69,17 @@ public class Main extends JFrame {
      * the item. 
      * @throws URISyntaxException 
      * @throws IOException */
-    private void viewPageClicked() throws IOException, URISyntaxException {    	
+    private void viewPageClicked(java.awt.event.ActionEvent event) throws IOException, URISyntaxException {    	
     	//java.awt.Desktop.getDesktop().browse(java.net.URI.create("https://www.barnesandnoble.com/w/toys-games-the-mind/32481555?ean=0854382007139"));
 //    	Desktop.getDesktop().browse(java.net.URI.create("https://www.barnesandnoble.com/w/toys-games-the-mind/32481555?ean=0854382007139"));
     	Desktop myURL = Desktop.getDesktop();
-		myURL.browse(new URI("https://www.barnesandnoble.com/w/toys-games-the-mind/32481555?ean=0854382007139"));
-    	viewPageClicked();
+    	try {
+    		myURL.browse(new URI("https://www.barnesandnoble.com/w/toys-games-the-mind/32481555?ean=0854382007139"));
+    	}
+    	catch(IOException e){
+    	}
+		
+    	//viewPageClicked();
     	showMessage("View clicked!");
     }
         
@@ -101,13 +106,18 @@ public class Main extends JFrame {
     private JPanel makeControlPanel() {
     	JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     	JButton refreshButton = new JButton("Refresh");
-    	JButton visitURL = new JButton("URL");
+    	JButton visitURL = new JButton("URL"); //Adds Button "URL"
     	refreshButton.setFocusPainted(false);
         refreshButton.addActionListener(this::refreshButtonClicked);
         panel.add(refreshButton);
-        
         visitURL.setFocusPainted(false);
-        //visitURL.addActionListener(this::viewPageClicked);
+        visitURL.addActionListener(proceedWeb -> {
+			try {
+				viewPageClicked(proceedWeb);
+			} catch (IOException | URISyntaxException e) {
+				e.printStackTrace();
+			}
+		});
         panel.add(visitURL);
         return panel;
     }
